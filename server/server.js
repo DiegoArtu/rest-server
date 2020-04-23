@@ -4,7 +4,7 @@ const app = express();
 app.use( express.urlencoded({ extended: false }) )
 
 app.get( '/user', ( req, res ) => {
-    res.json('Get User');
+    res.json('Get User please');
 })
 
 app.post( '/user', ( req, res ) => {
