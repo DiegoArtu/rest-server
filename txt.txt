@@ -1,4 +1,1 @@
-user: dartcodes
-pass:NCTjF9DpGiGUkfCI
-
-mongodb+srv://dartcodes:NCTjF9DpGiGUkfCI@cluster0-w6lg8.mongodb.net/coffee
+//archivo nulo
