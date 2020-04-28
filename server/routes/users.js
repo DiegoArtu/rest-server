@@ -1,10 +1,13 @@
 const express = require('express');
-const app = express();
-const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
-app.get( '/user', ( req, res ) => {
+const User = require('../models/user');
+const { verifToken, verifAdminRole } = require('../middlewares/autho');
+
+const app = express();
+
+app.get( '/user', verifToken, ( req, res ) => {
 
     let from = req.query.from || 0;
     from = Number(from);
@@ -34,7 +37,7 @@ app.get( '/user', ( req, res ) => {
 
 })
 
-app.post( '/user', ( req, res ) => {
+app.post( '/user', [verifToken, verifAdminRole], ( req, res ) => {
 
     let body = req.body;
 
@@ -66,7 +69,7 @@ app.post( '/user', ( req, res ) => {
     }))
 })
 
-app.put( '/user/:id', ( req, res ) => {
+app.put( '/user/:id', [verifToken, verifAdminRole],( req, res ) => {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status']); 
@@ -85,7 +88,7 @@ app.put( '/user/:id', ( req, res ) => {
 
 })
 
-app.delete( '/user/:id', ( req, res ) => {
+app.delete( '/user/:id', [verifToken, verifAdminRole], ( req, res ) => {
 
     let id = req.params.id;
     let statusFalse = {

@@ -1,14 +1,14 @@
 require('./config/config');
+
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
 
+const app = express();
 
 app.use( express.urlencoded({ extended: false }) );
 
-app.use(require('../routes/users'));
-
-
+//Global Routes Configuration 
+app.use(require('./routes/index'));
 
 mongoose.connect(process.env.URLDB,{
  
